@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Philosophy + CSS Positioning + Fonts</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: lightgray;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+    }
+
+    h1 {
+      text-align: center;
+      color: black;
+      font-size: 2rem;
+    }
+
+    .section {
+      background: white;
+      border: 1px solid gray;
+      padding: 30px;
+      margin: 40px auto;
+      border-radius: 12px;
+      position: relative;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .section-title {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .relative-container {
+      background: lightcyan;
+      position: relative;
+      height: 500px;
+      border: 2px dashed teal;
+      padding: 15px;
+    }
+
+    .iframe-box {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 400px;
+      height: 250px;
+      border: 2px solid orange;
+    }
+
+    .attribute-iframe {
+      position: absolute;
+      top: 260px;
+      left: 30px;
+      width: 450px;
+      height: 220px;
+      border: 2px solid purple;
+    }
+
+    .fixed-iframe {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 400px;
+      height: 280px;
+      border: 2px solid green;
+      background: white;
+      z-index: 1000;
+    }
+
+    div.relative-container iframe.iframe-box[data-type="special"]#specialSite {
+      border: 4px solid red;
+      background-color: purple;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    #fontSelector {
+      display: block;
+      margin: 10px auto 30px;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #dynamicText {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 1.4rem;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px dashed gray;
+      width: 90%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Live Websites with Philosophy & Custom Fonts</h1>
+
+  <select id="fontSelector" onchange="changeFont()">
+    <option value="Arial, sans-serif">Arial</option>
+    <option value="'Courier New', monospace">Courier New</option>
+    <option value="'Georgia', serif">Georgia</option>
+    <option value="'Times New Roman', serif">Times New Roman</option>
+    <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+  </select>
+
+  <button onclick="replaceIframes()">Replace Websites</button>
+  <button onclick="changeParagraph()">New Philosophical Quote</button>
+
+  <div class="section">
+    <div class="section-title">Positioned IFrames (Live Websites)</div>
+    <div class="relative-container">
+      <iframe src="https://example.com"
+              class="iframe-box"
+              data-type="special"
+              id="specialSite"
+              title="Special Site"></iframe>
+
+      <iframe src="https://wikipedia.org"
+              class="iframe-box"
+              style="top: 20px; left: 460px;"
+              id="absoluteSite"
+              title="Absolute Site"></iframe>
+
+      <iframe src="https://openai.com"
+              class="attribute-iframe"
+              data-type="special"
+              id="attributeSite"
+              title="Attribute Site"></iframe>
+    </div>
+  </div>
+
+  <iframe src="https://developer.mozilla.org"
+          class="fixed-iframe"
+          id="fixedSite"
+          title="Fixed Site"></iframe>
+
+  <div id="dynamicText">
+    “The unexamined life is not worth living.” — Socrates
+  </div>
+
+  <script>
+    function replaceIframes() {
+      document.getElementById("specialSite").src = "https://duckduckgo.com";
+      document.getElementById("absoluteSite").src = "https://stackoverflow.com";
+      document.getElementById("attributeSite").src = "https://news.ycombinator.com";
+      document.getElementById("fixedSite").src = "https://css-tricks.com";
+    }
+
+    function changeFont() {
+      const selectedFont = document.getElementById("fontSelector").value;
+      document.body.style.fontFamily = selectedFont;
+    }
+
+    function changeParagraph() {
+      const quotes = [
+        "“Happiness depends upon ourselves.” — Aristotle",
+        "“No man has a good enough memory to be a successful liar.” — Abraham Lincoln",
+        "“The only true wisdom is in knowing you know nothing.” — Socrates",
+        "“Life must be understood backward. But it must be lived forward.” — Søren Kierkegaard",
+        "“He who opens a school door, closes a prison.” — Victor Hugo",
+        "“Man is condemned to be free.” — Jean-Paul Sartre",
+        "“That which does not kill us makes us stronger.” — Friedrich Nietzsche",
+        "“Hell is other people.” — Jean-Paul Sartre",
+        "“Liberty consists in doing what one desires.” — John Stuart Mill",
+        "“Freedom is the freedom to say that two plus two make four.” — George Orwell"
+      ];
+
+      const para = document.getElementById("dynamicText");
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      para.innerText = quotes[randomIndex];
+    }
+  </script>
+
+</body>
+</html>
